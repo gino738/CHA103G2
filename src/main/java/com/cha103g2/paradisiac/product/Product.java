@@ -6,6 +6,9 @@ public class Product {
 	public void setProduct1() {
 		
 	}
+	public void getProduct1() {
+		
+	}
 	
 	
 }
