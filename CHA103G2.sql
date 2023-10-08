@@ -316,8 +316,6 @@ VALUES
   (4, '藝術工作坊', 800, 6, 5, 1, '在我們的藝術工作坊中發揮你的創造力。'),
   (5, '音樂會之夜', 100, 20, 15, 1, '在我們的音樂會上享受音樂和娛樂之夜。');
 
--- 檢查 'act' 表格以驗證資料
-SELECT * FROM act;
 
 
 DROP TABLE IF EXISTS schd;                            -- 檔期資料表
@@ -345,11 +343,6 @@ VALUES
   (3, 3, '2023-08-20 12:00:00', '2023-09-10 18:00:00', '2023-09-25 10:00:00', '2023-08-15 11:00:00', '2023-09-05 23:59:59', 40, 8, 15, 0, 0, 1),
   (4, 4, '2023-07-10 09:00:00', '2023-07-30 18:00:00', '2023-08-15 15:30:00', '2023-07-05 08:00:00', '2023-07-25 23:59:59', 25, 6, 12, 0, 0, 1),
   (5, 5, '2023-06-25 14:00:00', '2023-07-10 18:00:00', '2023-07-30 20:00:00', '2023-06-20 13:00:00', '2023-07-01 23:59:59', 60, 20, 50, 0, 0, 1);
-
--- 檢查 'schd' 表格以驗證資料
-SELECT * FROM schd;
-
-
 
 DROP TABLE IF EXISTS act_order;                       -- 活動訂單資料表
 CREATE TABLE act_order(
@@ -421,9 +414,6 @@ VALUES
   (4, 3, NULL, 'Cooking Class Photo 1'),
   (5, 5, NULL, 'Concert Night Photo 1');
 
--- 檢查 'act_photo' 表格以驗證資料
-SELECT * FROM act_photo;
-
 
 -- =====================================[會員管理]===================================
 DROP TABLE IF EXISTS members;                          -- 會員資料表
@@ -471,11 +461,6 @@ VALUES
   (2, 102, '家庭相簿 1', null, '2023-09-15'),
   (3, 103, '活動相簿 1', null, '2023-09-20');
 
-
--- 檢查 'photo_album' 表格以驗證資料
-SELECT * FROM photo_album;
-
-
 DROP TABLE IF EXISTS photo;                           -- 紀念相片資料表
 CREATE TABLE photo (
   photo_no int NOT NULL,                              -- 相片編號
@@ -486,7 +471,7 @@ CREATE TABLE photo (
   PRIMARY KEY (photo_no)                              -- PK：photo_no               
 );
 
--- 插入資料到 'photo' 表格
+
 INSERT INTO photo (photo_no, alb_no, photo_name, photo, photo_date)
 VALUES
   (1, 101, '活動合照 1',null , '2023-10-05 14:30:00'),
@@ -494,9 +479,6 @@ VALUES
   (3, 102, '聚餐照片 1',null , '2023-09-25 18:45:00'),
   (4, 103, '聚餐照片 2',null , '2023-09-20 16:00:00'),
   (5, 102, '聚餐照片 3',null , '2023-09-30 11:20:00');
-
--- 檢查 'photo' 表格以驗證資料
-SELECT * FROM photo;
 
 
 DROP TABLE IF EXISTS cs_messages;                     -- 客服訊息資料表
@@ -547,9 +529,6 @@ VALUES
   (4, 101, 1, '陳六', 'chen.liu@example.com', 'chenliu', 'password4', 1, '345-678-9012'),
   (5, 102, 1, '趙七', 'zhao.qi@example.com', 'zhaoqi', 'password5', 2, '456-789-0123');
 
--- 檢查 'employee' 表格以驗證資料
-SELECT * FROM employee;
-
 
 DROP TABLE IF EXISTS department;                      -- 部門群組資料表
 CREATE TABLE department(
@@ -564,12 +543,6 @@ VALUES
   (102, '房務部'),
   (103, '人資部'),
   (104, '企劃部');
-
-
--- 檢查 'department' 表格以驗證資料
-SELECT * FROM department;
-
-
 
 DROP TABLE IF EXISTS fuc;                             -- 功能
 CREATE TABLE fuc(
@@ -589,10 +562,6 @@ VALUES
   (107, '最新消息'),
   (108, '活動');
 
--- 檢查 'fuc' 表格以驗證資料
-SELECT * FROM fuc;
-
-
 DROP TABLE IF EXISTS department_acce;                 -- 群組權限資料表
 CREATE TABLE department_acce(
   dept_no int NOT NULL,                               -- 部門編號
@@ -606,10 +575,6 @@ VALUES
   (2, 102),
   (3, 103),
   (4, 104);
-
-
--- 檢查 'department_acce' 表格以驗證資料
-SELECT * FROM department_acce;
 
 -- ALTER TABLE department_acce
 -- ADD CONSTRAINT fk_dept_acce_dept
@@ -641,10 +606,6 @@ VALUES
   (3, '2023-08-15 15:00:00', '2023-08-31 22:00:00', '節日慶祝', 1, '我們將在這個假期期間舉辦特別的慶祝活動。加入我們一起慶祝吧！', NULL),
   (4, '2023-07-10 08:00:00', '2023-07-15 20:00:00', '會議設施', 3, '我們提供現代化的會議設施，是舉辦商務會議的理想地點。', NULL),
   (5, '2023-06-25 12:00:00', '2023-06-30 18:00:00', '夏日沙灘派對', 2, '加入我們的夏日沙灘派對，享受陽光、海灘和美食。', NULL);
-
--- 檢查 'news' 表格以驗證資料
-SELECT * FROM news;
-
 
 -- =====================================[客服機器人]===================================
 
