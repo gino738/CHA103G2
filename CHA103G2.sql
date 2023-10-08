@@ -128,22 +128,35 @@ INSERT INTO room_num (R_NUM, CHECKIN_NAME, ROOM_STATUS, ROOM_TYPE_NO, ROOM_ORDER
 (10, '林小玲', 1, 2, 10);
 
 -- =====================================[購物管理]===================================  
-DROP TABLE IF EXISTS shop_order;                      -- 商城訂單資料表
+DROP TABLE IF EXISTS shop_order;
 CREATE TABLE shop_order ( 
   shop_order_no int NOT NULL,                         -- 商品訂單編號
   mem_no int NOT NUll,                                -- 會員編號
   emp_no int NULL,                                    -- 員工編號
   order_amomunt int NOT NULL,                         -- 訂單總金額
   order_status boolean NOT NULL,                      -- 訂單狀態(0:取消、1:成立)
-  payment_method Tinyint NOT NULL,                    -- 付款方式(1:信用卡、2匯款)
+  pay_method Tinyint NOT NULL,                    -- 付款方式(1:信用卡、2匯款)
   pay_status boolean NOT NULL,                        -- 付款狀態(0:未付款、1:已付款)
   product_order_date datetime NOT NULL,               -- 訂單建立時間
+  return_exchange Tinyint,							  -- 退貨/換貨(0:退貨 1:換貨)
   shipping_method Tinyint NOT NULL,                   -- 取貨方式(1:宅配、2:現場取貨)
   order_name varchar(30) NOT NULL,                    -- 收件人姓名
   order_mobile varchar(30) NULL,                      -- 收件人電話
   order_address varchar(30) NOT NULl,                 -- 收件人地址
   PRIMARY KEY (shop_order_no)                         -- PK：shop_order_no
 );
+
+INSERT INTO shop_order (shop_order_no, mem_no, emp_no, order_amomunt, order_status, pay_method, pay_status, product_order_date, return_exchange, shipping_method, order_name, order_mobile, order_address) VALUES 
+(1, 101, 201, 5400, 1, 1, 1, '2023-10-04 12:34:56', NULL, 1, '王小明', '0912345678', '台北市信義區'),
+(2, 102, 201, 5400, 1, 2, 0, '2023-10-03 11:23:45', NULL, 2, '李大牛', '0923456789', '新北市板橋區'),
+(3, 103, 201, 4800, 0, 1, 0, '2023-09-30 09:12:34', NULL, 1, '張三', NULL, '台中市西屯區'),
+(4, 104, 201, 13500, 1, 1, 1, '2023-09-29 18:45:12', NULL, 2, '李四', '0934567890', '高雄市鳳山區'),
+(5, 105, 201, 2400, 1, 2, 1, '2023-09-28 08:32:41', NULL, 1, '王五', '0945678901', '台南市安平區'),
+(6, 106, 201, 120000, 0, 1, 0, '2023-09-27 14:56:23', NULL, 2, '趙六', '0956789012', '新竹市東區'),
+(7, 107, 201, 1200000, 1, 1, 1, '2023-09-26 10:23:45', NULL, 1, '陳七', '0967890123', '桃園市中壢區'),
+(8, 108, 201, 100000, 1, 2, 0, '2023-09-25 12:34:56', NULL, 2, '黃八', NULL, '花蓮縣花蓮市'),
+(9, 109, 201, 10500, 0, 1, 1, '2023-09-24 16:12:45', NULL, 1, '劉九', '0989012345', '嘉義市東區'),
+(10, 110, 201, 30000, 1, 2, 1, '2023-09-23 15:45:23', NULL, 2, '楊十', '0990123456', '基隆市仁愛區');
 
 DROP TABLE IF EXISTS product_order_detail;            -- 商品訂單明細
 CREATE TABLE product_order_detail (
@@ -153,8 +166,23 @@ CREATE TABLE product_order_detail (
   product_amount int NOT NULL,                        -- 商品付款價
   product_price int NOT NULL,                         -- 商品原價
   product_discount_price int NULL,                    -- 商品優惠價
-  PRIMARY KEY (shop_order_no)                         -- PK：shop_order_no
+  PRIMARY KEY (shop_order_no, product_no)             -- PK：shop_order_no, product_no
 );
+
+INSERT INTO product_order_detail (shop_order_no, product_no, order_quantity, product_amount, product_price, product_discount_price) VALUES
+(1, 301, 2, 2400, 2400, NULL),
+(1, 302, 2, 3000, 3000, null),
+(2, 301, 3, 3600, 3600, NULL),
+(2, 304, 1, 1800, 1800, null),
+(3, 301, 4, 4800, 4800, null),
+(4, 305, 3, 13500, 13500, null),
+(5, 301, 2, 2400, 2400, null),
+(6, 306, 2, 120000, 120000, NULL),
+(7, 307, 1, 1200000, 1200000, null),
+(8, 308, 1, 100000, 100000, null),
+(9, 309, 3, 10500, 10500, NULL),
+(10, 310, 2, 30000, 30000, null);
+
 
 DROP TABLE IF EXISTS product;                         -- 商品資料表
 CREATE TABLE product (
@@ -169,6 +197,19 @@ CREATE TABLE product (
   PRIMARY KEY (product_no)                            -- PK：product_no
 );
 
+INSERT INTO product (product_no, product_category_no, product_name, product_price, product_quantity, product_status, product_total_review_count, product_total_review_status) VALUES
+(301, 1, 'Paradisiac魔法棒', 1200, 100, 1, null, null),
+(302, 2, 'Paradisiac公主裙', 1500, 50, 1, null, null),
+(303, 3, 'Paradisiac色筆組', 300, 30, 1, null, null),
+(304, 4, 'Paradisiac主題床單', 1800, 25, 1, null, null),
+(305, 5, 'Paradisiac限量音樂盒', 4500, 40, 1, null, null),
+(306, 6, 'Louis Vuitton Monogram手袋', 60000, 200, 1, null, null),
+(307, 7, '勞力士Day-Date鑽石錶', 1200000, 70, 1, null, null),
+(308, 8, 'Chanel小黑裙', 100000, 15, 1, null, null),
+(309, 9, 'Dior J_adore香水', 3500, 10, 1, null, null),
+(310, 10, 'Hermès絲綢裝飾枕頭', 15000, 20, 1, null, null);
+
+
 DROP TABLE IF EXISTS product_category;                -- 商品類別資料表
 CREATE TABLE product_category (
   product_category_no int NOT NULL AUTO_INCREMENT,    -- 商品類別編號
@@ -176,6 +217,18 @@ CREATE TABLE product_category (
   product_category_desc varchar(1000) NULL,           -- 商品類別敘述
   PRIMARY KEY (product_category_no)                    -- PK：roduct_category
 );
+
+INSERT INTO product_category (product_category_name, product_category_desc) VALUES
+('玩具與公仔', '包括了Paradisiac角色的玩偶或動作人偶'),
+('服裝與配件', 'T恤、帽子、書包，甚至是專為特定Paradisiac角色或電影設計的服裝'),
+('文具用品', '這裡可以包括筆記本、鉛筆、書包等，都會帶有Paradisiac角色的圖案或設計'),
+('家居用品', '如床單、抱枕、餐具等，也會有Paradisiac角色或故事主題'),
+('收藏品', '限量版的藝術品、模型或是成人收藏用的高級玩具等'),
+('手袋與皮件', '包括名牌手袋、皮夾、行李箱等，這些通常是由高級材料製成並具有出色的工藝'),
+('珠寶與鐘錶', '如鑽石戒指、名表等，這類商品通常是手工製作並使用高價材料'),
+('高端服裝', '包括訂製服、名牌禮服或高級休閒服，這些服裝往往由知名設計師或品牌推出'),
+('香水與美妝', '高端品牌的香水或化妝品，不僅品質上乘，包裝也經常是一件藝術品'),
+('家居與裝飾品', '如高級家具、藝術品或其他裝飾物，這些商品通常由知名設計師設計，或是限量生產');
 
 DROP TABLE IF EXISTS product_photo;                   -- 商品相片資料表
 CREATE TABLE product_photo (
@@ -185,12 +238,37 @@ CREATE TABLE product_photo (
   PRIMARY KEY (product_photo_no)                      -- 商品相片編號                   
 );
 
+INSERT INTO product_photo (product_photo_no, product_no, product_photo) VALUES 
+(1, 301, CAST('TEST' AS BINARY)),
+(2, 302, CAST('TEST' AS BINARY)),
+(3, 303, CAST('TEST' AS BINARY)),
+(4, 304, CAST('TEST' AS BINARY)),
+(5, 305, CAST('TEST' AS BINARY)),
+(6, 306, CAST('TEST' AS BINARY)),
+(7, 307, CAST('TEST' AS BINARY)),
+(8, 308, CAST('TEST' AS BINARY)),
+(9, 309, CAST('TEST' AS BINARY)),
+(10, 310, CAST('TEST' AS BINARY));
+
 DROP TABLE IF EXISTS promotion_product_detail;        -- 促銷商品明細
 CREATE TABLE promotion_product_detail (
   product_no int NOT NULL,                            -- 商品編號(FK)
   promotion_no int NOT NULL,                          -- 促銷編號(FK)
   PRIMARY KEY (product_no,promotion_no)               -- PK:product_no,promotion_no  <---待確認
 );
+
+INSERT INTO promotion_product_detail (product_no, promotion_no)
+VALUES
+  (1, 101),
+  (2, 102),
+  (3, 103),
+  (4, 104),
+  (5, 105),
+  (6, 106),
+  (7, 107),
+  (8, 108),
+  (9, 109),
+  (10, 110);
 
 DROP TABLE IF EXISTS promotion;                       -- 促銷專案
 CREATE TABLE promotion (
@@ -203,6 +281,19 @@ CREATE TABLE promotion (
   promotion_status boolean NOT NULL,                  -- 促銷專案狀態
   PRIMARY KEY (promotion_no)                          -- PK：promotion_no
 );
+
+INSERT INTO promotion (promotion_no, promotion_name, promotion_describtion, promotion_start_date, promotion_end_date, promotion_discount, promotion_status)
+VALUES
+  (101, '夏季特惠', '熱銷商品優惠', '2023-06-01 00:00:00', '2023-06-30 23:59:59', 0.15, true),
+  (102, '清涼一夏', '暑期限定優惠', '2023-07-15 00:00:00', '2023-08-15 23:59:59', 0.10, true),
+  (103, '秋季新品', '秋冬系列上市', '2023-09-01 00:00:00', '2023-09-30 23:59:59', 0.20, true),
+  (104, '感恩節特賣', '感恩節慶祝優惠', '2023-11-01 00:00:00', '2023-11-30 23:59:59', 0.25, true),
+  (105, '聖誕狂歡', '聖誕節特別優惠', '2023-12-10 00:00:00', '2023-12-25 23:59:59', 0.30, true),
+  (106, '新年好運', '迎接新年折扣', '2024-01-01 00:00:00', '2024-01-15 23:59:59', 0.15, true),
+  (107, '情人節驚喜', '情人節浪漫優惠', '2024-02-01 00:00:00', '2024-02-14 23:59:59', 0.10, true),
+  (108, '春季搶鮮', '春季新品特價', '2024-03-01 00:00:00', '2024-03-31 23:59:59', 0.20, true),
+  (109, '五一勞動節', '五一勞動節慶祝', '2024-05-01 00:00:00', '2024-05-05 23:59:59', 0.15, true),
+  (110, '母親節感恩', '母親節特別優惠', '2024-05-10 00:00:00', '2024-05-12 23:59:59', 0.10, true);
 
 -- =====================================[活動管理]===================================
 DROP TABLE IF EXISTS act;                             -- 活動 
