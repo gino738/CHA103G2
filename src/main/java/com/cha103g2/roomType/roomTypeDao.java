@@ -39,7 +39,6 @@ public class roomTypeDao {
         Connection con = null;
         PreparedStatement pstmt = null;
         
-        
 
         try {
             con = ds.getConnection();
