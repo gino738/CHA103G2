@@ -24,6 +24,7 @@ public class roomTypeDao {
         }
     }
 
+    
     private static final String INSERT_STMT = 
         "INSERT INTO room_type (room_name, rtype, room_total, price, normal_price, holiday_price, bridge_holiday_price, notice, facility, rtype_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_ALL_STMT = 
