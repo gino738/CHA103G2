@@ -38,6 +38,8 @@ public class roomTypeDao {
     public void insert(roomTypeVo roomTypeVO) {
         Connection con = null;
         PreparedStatement pstmt = null;
+        
+        
 
         try {
             con = ds.getConnection();
