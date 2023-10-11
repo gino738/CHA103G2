@@ -11,6 +11,7 @@ public class ProductVO implements java.io.Serializable{
 	private Integer productstatus;
 	private Integer producttotalreviewcount;
 	private Integer producttotalreviewstatus;
+	
 	public ProductVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -42,11 +43,14 @@ public class ProductVO implements java.io.Serializable{
 
 	@Override
 	public String toString() {
+
 		return "ProductVO [productno=" + productno + ", productcategoryno=" + productcategoryno + ", productname="
 				+ productname + ", productprice=" + productprice + ", productquantity=" + productquantity
 				+ ", productstatus=" + productstatus + ", producttotalreviewcount=" + producttotalreviewcount
 				+ ", producttotalreviewstatus=" + producttotalreviewstatus + "]";
 	}
+	
+	
 	public Integer getProductno() {
 		return productno;
 	}
