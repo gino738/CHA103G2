@@ -54,48 +54,49 @@ CREATE TABLE room_type (
 
 INSERT INTO room_type (ROOM_TYPE_NO, ROOM_NAME, RTYPE, ROOM_TOTAL, PRICE, NORMAL_PRICE, HOLIDAY_PRICE, BRIDGE_HOLIDAY_PRICE, NOTICE, FACILITY, R_TYPE_STATUS) VALUES
 (1, '豪華套房1', '單人房', 5, 1500, 1200, 1800, 2000, '附早餐', '免費Wi-Fi', 1),
-(2, '豪華套房2', '單人房', 3, 2000, 1800, 2500, 2800, '附停車位', '游泳池', 1),
-(3, '標準房1', '單人房', 8, 1000, 800, 1200, 1400, '不退款', '免費早餐', 1),
+(2, '豪華套房2', '單人房', 5, 2000, 1800, 2500, 2800, '附停車位', '游泳池', 1),
+(3, '標準房1', '單人房', 5, 1000, 800, 1200, 1400, '不退款', '免費早餐', 1),
 (4, '標準房2', '單人房', 5, 1600, 1300, 1900, 2100, '附早餐', '免費Wi-Fi', 1),
-(5, '家庭套房2', '二人房', 3, 2100, 1900, 2600, 2900, '附停車位', '游泳池', 1),
-(6, '家庭套房2', '二人房', 8, 1100, 900, 1300, 1500, '不退款', '免費早餐', 1),
+(5, '家庭套房2', '二人房', 5, 2100, 1900, 2600, 2900, '附停車位', '游泳池', 1),
+(6, '家庭套房2', '二人房', 5, 1100, 900, 1300, 1500, '不退款', '免費早餐', 1),
 (7, '豪華套房3', '四人房', 5, 1700, 1400, 2000, 2200, '附早餐', '免費Wi-Fi', 1),
-(8, '家庭套房3', '四人房', 3, 2200, 2000, 2700, 3000, '附停車位', '游泳池', 1),
-(9, '標準房3', '八人房', 8, 1200, 1000, 1400, 1600, '不退款', '免費早餐', 1),
-(10, '奢華套房', '八人房', 4, 1800, 1500, 2200, 2400, '附早餐', '免費Wi-Fi', 1); 
+(8, '家庭套房3', '四人房', 5, 2200, 2000, 2700, 3000, '附停車位', '游泳池', 1),
+(9, '標準房3', '八人房', 5, 1200, 1000, 1400, 1600, '不退款', '免費早餐', 1),
+(10, '奢華套房', '八人房', 5, 1800, 1500, 2200, 2400, '附早餐', '免費Wi-Fi', 1); 
 
 DROP TABLE IF EXISTS room_calendar;                   -- 房型行事曆
 CREATE TABLE room_calendar (               
   calendar_no int NOT NULL,                           -- 房型行事曆編號
   room_type_no int NOT NULL,                          -- 房型編號
-  cdate date NOT NULL,                                -- 日期
+  cdate date NULL,                                    -- 日期
   room_total int NOT NULL,                            -- 房間總數量
-  room_booking int NOT NULL,                          -- 房間預定數量
-  abailable boolean NOT NULL default 1,               -- 是否可訂房(0:不可預訂、1:可以預訂(預設))
+  room_booking int NOT NULL default 1,                -- 房間已預約數量
+  available boolean as(room_total > room_booking),    -- 是否可訂房(0:不可預訂、1:可以預訂(預設))
   PRIMARY KEY (calendar_no)                           -- PK:room_type_no
 );
 
-INSERT INTO room_calendar (CALENDAR_NO, CDATE, ROOM_TOTAL, ROOM_BOOKING, abailable, ROOM_TYPE_NO) VALUES
-(1, '2023-10-04', 10, 2, 8, 1),
-(2, '2023-10-05', 10, 3, 7, 1),
-(3, '2023-10-06', 10, 1, 9, 1),
-(4, '2023-10-07', 10, 2, 8, 1),
-(5, '2023-10-08', 10, 4, 6, 1),
-(6, '2023-10-09', 10, 1, 9, 1),
-(7, '2023-10-10', 10, 3, 7, 1),
-(8, '2023-10-11', 10, 2, 8, 1),
-(9, '2023-10-12', 10, 1, 9, 1),
-(10, '2023-10-13', 10, 4, 6, 1);
+INSERT INTO room_calendar(CALENDAR_NO,ROOM_TYPE_NO,CDATE, ROOM_TOTAL, ROOM_BOOKING) 
+VALUES
+(1,1,'2023-11-1',5,2),
+(2,1,'2023-11-2',5,1),
+(3,2,'2023-11-3',5,3),
+(4,4,'2023-11-4',5,1),
+(5,3,'2023-11-5',5,5),
+(6,2,'2023-11-6',5,2),
+(7,6,'2023-11-7',5,5),
+(8,8,'2023-11-8',5,2),
+(9,4,'2023-11-9',5,2),
+(10,9,'2023-11-10',5,3);
 
 DROP TABLE IF EXISTS room_picture;                    -- 房型照片資料表
 CREATE TABLE room_picture (
-  pciture_no int NOT NULL,                            -- 照片編號
+  photo_no int NOT NULL,                            -- 照片編號
   room_type_no int NOT NULL,                          -- 房型編號(FK)
   pic mediumblob NULL,                                -- 照片名稱
   PRIMARY KEY (pciture_no)                            -- PK:pciture_no
 );
 
-INSERT INTO room_picture (pciture_no, room_type_no, pic) 
+INSERT INTO room_picture (photo_no, room_type_no, pic) 
 VALUES 
   (1, 1, ''),
   (2, 1, ''),
