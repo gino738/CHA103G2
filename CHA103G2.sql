@@ -68,9 +68,9 @@ DROP TABLE IF EXISTS room_calendar;                   -- 房型行事曆
 CREATE TABLE room_calendar (               
   calendar_no int NOT NULL,                           -- 房型行事曆編號
   room_type_no int NOT NULL,                          -- 房型編號
-  cdate date NOT NULL,                                -- 日期
+  cdate date NULL,                                    -- 日期
   room_total int NOT NULL,                            -- 房間總數量
-  room_booking int NOT NULL default 0,                -- 房間已預約數量
+  room_booking int NOT NULL default 1,                -- 房間已預約數量
   available boolean as(room_total > room_booking),    -- 是否可訂房(0:不可預訂、1:可以預訂(預設))
   PRIMARY KEY (calendar_no)                           -- PK:room_type_no
 );
