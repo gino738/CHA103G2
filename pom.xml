@@ -10,6 +10,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 
+
+
 	<name>
 		paradisiac</name>
 	<!-- FIXME change it to the project's website -->
@@ -17,6 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
