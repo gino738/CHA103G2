@@ -93,7 +93,7 @@ CREATE TABLE room_picture (
   photo_no int NOT NULL,                            -- 照片編號
   room_type_no int NOT NULL,                          -- 房型編號(FK)
   pic mediumblob NULL,                                -- 照片名稱
-  PRIMARY KEY (pciture_no)                            -- PK:pciture_no
+  PRIMARY KEY (photo_no)                            -- PK:pciture_no
 );
 
 INSERT INTO room_picture (photo_no, room_type_no, pic) 
