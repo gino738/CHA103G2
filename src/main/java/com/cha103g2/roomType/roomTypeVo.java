@@ -2,19 +2,61 @@ package com.cha103g2.roomType;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "room_type")
 public class roomTypeVo {
+	@Id
+	@Column(name = "room_type_no")
 	private Integer roomTypeNo;
+	@Column(name = "room_name")
 	private String roomName;
+	@Column(name = "rtype")
 	private String rtype;
+	@Column(name = "room_total")
 	private Integer roomTotal;
+	@Column(name = "price")
 	private Integer price;
+	@Column(name = "normal_price")
 	private Integer normalPrice;
+	@Column(name = "holiday_price")
 	private Integer holidayPrice;
+	@Column(name = "bridge_holiday_price")
 	private Integer bridgeHolidayPrice;
+	@Column(name = "notice")
 	private String notice;
+	@Column(name = "facility")
 	private String facility;
+	@Column(name = "r_type_status")
 	private boolean rTypeStatus;
 	
+	
+	public roomTypeVo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public roomTypeVo(Integer roomTypeNo, String roomName, String rtype, Integer roomTotal, Integer price,
+			Integer normalPrice, Integer holidayPrice, Integer bridgeHolidayPrice, String notice, String facility,
+			boolean rTypeStatus) {
+		super();
+		this.roomTypeNo = roomTypeNo;
+		this.roomName = roomName;
+		this.rtype = rtype;
+		this.roomTotal = roomTotal;
+		this.price = price;
+		this.normalPrice = normalPrice;
+		this.holidayPrice = holidayPrice;
+		this.bridgeHolidayPrice = bridgeHolidayPrice;
+		this.notice = notice;
+		this.facility = facility;
+		this.rTypeStatus = rTypeStatus;
+	}
+
 	public Integer getRoomTypeNo() {
 		return roomTypeNo;
 	}

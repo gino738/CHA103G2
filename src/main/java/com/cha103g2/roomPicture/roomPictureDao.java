@@ -44,7 +44,7 @@ public class roomPictureDao {
             con = ds.getConnection();
             pstmt = con.prepareStatement(INSERT_STMT);
             
-            pstmt.setInt(1, roomPictureVO.getRoom_typeNo());
+            pstmt.setInt(1, roomPictureVO.getRoomTypeNo());
             pstmt.setBytes(2, roomPictureVO.getPic());
             
             pstmt.executeUpdate();
@@ -76,7 +76,7 @@ public class roomPictureDao {
             con = ds.getConnection();
             pstmt = con.prepareStatement(UPDATE);
 
-            pstmt.setInt(1, roomPictureVO.getRoom_typeNo());
+            pstmt.setInt(1, roomPictureVO.getRoomTypeNo());
             pstmt.setBytes(2, roomPictureVO.getPic());
             pstmt.setInt(3, roomPictureVO.getPictureNo());
 
@@ -149,7 +149,7 @@ public class roomPictureDao {
             while (rs.next()) {
                 roomPictureVO = new roomPictureVo();
                 roomPictureVO.setPictureNo(rs.getInt("pictureNo"));
-                roomPictureVO.setRoom_typeNo(rs.getInt("room_typeNo"));
+                roomPictureVO.setRoomTypeNo(rs.getInt("room_typeNo"));
                 roomPictureVO.setPic(rs.getBytes("pic"));
             }
         } catch (SQLException se) {
@@ -196,7 +196,7 @@ public class roomPictureDao {
             while (rs.next()) {
                 roomPictureVO = new roomPictureVo();
                 roomPictureVO.setPictureNo(rs.getInt("pictureNo"));
-                roomPictureVO.setRoom_typeNo(rs.getInt("room_typeNo"));
+                roomPictureVO.setRoomTypeNo(rs.getInt("room_typeNo"));
                 roomPictureVO.setPic(rs.getBytes("pic"));
                 list.add(roomPictureVO);
             }
