@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 public class PromotionDAO implements PromotionDAO_interface{
 	private static DataSource ds = null;
 	static {
-		try {
+		try { 
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {

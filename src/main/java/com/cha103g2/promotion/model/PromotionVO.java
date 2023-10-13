@@ -2,7 +2,7 @@ package com.cha103g2.promotion.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-
+ 
 public class PromotionVO implements Serializable{
 //	促銷編號 促銷專案名稱 促銷專案描述 促銷專案開始日期
 //	促銷專案結束日期 促銷專案折扣 促銷專案狀態
