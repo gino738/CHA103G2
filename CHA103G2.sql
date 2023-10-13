@@ -275,7 +275,7 @@ DROP TABLE IF EXISTS promotion;                       -- 促銷專案
 CREATE TABLE promotion (
   promotion_no int NOT NULL,                          -- 促銷編號
   promotion_name varchar(30) NOT NULL,                -- 促銷專案名稱
-  promotion_describtion varchar(30) NULL,               -- 促銷專案描述
+  promotion_describition varchar(30) NULL,               -- 促銷專案描述
   promotion_start_date datetime NOT NULL,             -- 促銷專案開始日期
   promotion_end_date datetime NULL,                   -- 促銷專案結束日期
   promotion_discount numeric(3,2) NOT NULL,           -- 促銷專案折扣  
@@ -283,7 +283,7 @@ CREATE TABLE promotion (
   PRIMARY KEY (promotion_no)                          -- PK：promotion_no
 );
 
-INSERT INTO promotion (promotion_no, promotion_name, promotion_describtion, promotion_start_date, promotion_end_date, promotion_discount, promotion_status)
+INSERT INTO promotion (promotion_no, promotion_name, promotion_describition, promotion_start_date, promotion_end_date, promotion_discount, promotion_status)
 VALUES
   (101, '夏季特惠', '熱銷商品優惠', '2023-06-01 00:00:00', '2023-06-30 23:59:59', 0.15, true),
   (102, '清涼一夏', '暑期限定優惠', '2023-07-15 00:00:00', '2023-08-15 23:59:59', 0.10, true),

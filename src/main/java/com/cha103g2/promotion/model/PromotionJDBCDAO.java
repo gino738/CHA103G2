@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PromotionJDBCDAO implements PromotionDAO_interface{
 		String driver = "com.mysql.cj.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/db01?serverTimezone=Asia/Taipei";
+		String url = "jdbc:mysql://localhost:3306/paradisiac?serverTimezone=Asia/Taipei";
 		String userid = "root";
 		String passwd = "ac598857";
 		
@@ -288,5 +288,12 @@ public class PromotionJDBCDAO implements PromotionDAO_interface{
 					}
 				}
 				return list;
+			}
+			
+			public static void main(String[] args) {
+				PromotionJDBCDAO dao = new PromotionJDBCDAO();
+				PromotionVO vo = dao.findByPrimaryKey(110);
+				System.out.println(vo.getProdes());
+				
 			}
 		}
