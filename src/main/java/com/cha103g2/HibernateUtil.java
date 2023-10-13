@@ -1,4 +1,4 @@
-package util;
+package com.cha103g2;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
