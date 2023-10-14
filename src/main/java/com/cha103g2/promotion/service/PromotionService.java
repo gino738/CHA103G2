@@ -1,7 +1,11 @@
-package com.cha103g2.promotion.model;
+package com.cha103g2.promotion.service;
 
 import java.sql.Date;
 import java.util.List;
+
+import com.cha103g2.promotion.dao.PromotionDAO;
+import com.cha103g2.promotion.dao.PromotionDAO_interface;
+import com.cha103g2.promotion.dao.PromotionVO;
 
 public class PromotionService {
  

@@ -1,4 +1,4 @@
-package com.cha103g2.promotion.model;
+package com.cha103g2.promotion.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
