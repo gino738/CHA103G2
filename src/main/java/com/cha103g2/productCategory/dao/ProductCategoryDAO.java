@@ -11,13 +11,13 @@ public interface ProductCategoryDAO {
 
 	int update(ProductCategory entity);
 	
-	int delete(Integer id);
+	int delete(ProductCategory id);
 	 
 	ProductCategory getById(Integer id);
 	
 	List<ProductCategory> getAll();
 	
-//	List<ProductCategory> getByCompositeQuery(Map<String, String> map);
+	List<ProductCategory> getByCompositeQuery(Map<String, String> map);
 	
 	List<ProductCategory> getAll(int currentPage);
 	

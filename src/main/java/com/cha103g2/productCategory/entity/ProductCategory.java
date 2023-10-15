@@ -13,42 +13,42 @@ public class ProductCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_category_no", updatable = false)
-	private Integer product_category_no;
+	private Integer productCategoryNo;
 	
 	@Column(name = "product_category_name")
-	private String product_category_name;
+	private String productCategoryName;
 	
 	@Column(name = "product_category_desc")
-	private String product_category_desc;
+	private String productCategoryDesc;
 
-	public Integer getProduct_category_no() {
-		return product_category_no;
+	public Integer getProductCategoryNo() {
+		return productCategoryNo;
 	}
 
-	public void setProduct_category_no(Integer product_category_no) {
-		this.product_category_no = product_category_no;
+	public void setProductCategoryNo(Integer productCategoryNo) {
+		this.productCategoryNo = productCategoryNo;
 	}
 
-	public String getProduct_category_name() {
-		return product_category_name;
+	public String getProductCategoryName() {
+		return productCategoryName;
 	}
 
-	public void setProduct_category_name(String product_category_name) {
-		this.product_category_name = product_category_name;
+	public void setProductCategoryName(String productCategoryName) {
+		this.productCategoryName = productCategoryName;
 	}
 
-	public String getProduct_category_desc() {
-		return product_category_desc;
+	public String getProductCategoryDesc() {
+		return productCategoryName;
 	}
 
-	public void setProduct_category_desc(String product_category_desc) {
-		this.product_category_desc = product_category_desc;
+	public void setProductCategoryDesc(String productCategoryDesc) {
+		this.productCategoryDesc = productCategoryDesc;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductCategory [product_category_no=" + product_category_no + ", product_category_name="
-				+ product_category_name + ", product_category_desc=" + product_category_desc + "]";
+		return "ProductCategory [product_category_no=" + productCategoryNo + ", product_category_name="
+				+ productCategoryName + ", product_category_desc=" + productCategoryDesc + "]";
 	}
 	
 	
