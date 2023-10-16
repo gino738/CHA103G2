@@ -1,5 +1,6 @@
 package com.cha103g2.photoAlbum;
 
+import java.sql.Blob;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -22,13 +23,28 @@ public class PhotoAlbumVO implements java.io.Serializable{
 	@Column(name = "alb_name")
 	private String albName;
 
-	@Column(name = "albphoto")
-	private Byte albPhoto;
+	//private Blob albPhoto;
+	// 因為 byte[] 會被 hibernate 視為 tinyblob 型別，所以跟DB裡的 longblob 不符，
+	//所以用 columnDefinition 定義
+	@Column(name = "alb_photo", columnDefinition = "mediumblobtext")
+	private byte[] albPhoto;
 	
-	@Column(name = "albdate")
+	@Column(name = "alb_date")
 	private Date albDate;
 	
-	
+	public PhotoAlbumVO() {
+		super();
+	}
+	//以下為小吳搭配TestHQLQueryProperty.java才會用到的建構子
+	public PhotoAlbumVO(Integer albNo, Integer memNo, String albName, byte[] albPhoto, Date albDate) {
+		super();
+		this.albNo = albNo;
+		this.memNo = memNo;
+		this.albName = albName;
+		this.albPhoto = albPhoto;
+		this.albDate = albDate;
+	}
+
 	public Integer getAlbNo() {
 		return albNo;
 	}
@@ -47,10 +63,10 @@ public class PhotoAlbumVO implements java.io.Serializable{
 	public void setAlbName(String albName) {
 		this.albName = albName;
 	}
-	public Byte getAlbPhoto() {
+	public byte[] getAlbPhoto() {
 		return albPhoto;
 	}
-	public void setAlbPhoto(Byte albPhoto) {
+	public void setAlbPhoto(byte[] albPhoto) {
 		this.albPhoto = albPhoto;
 	}
 	public Date getAlbDate() {

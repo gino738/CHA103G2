@@ -19,32 +19,50 @@ public class TestPAHibernateDAO {
 		pa1.setAlbNo(4);
 		pa1.setMemNo(104);
 		pa1.setAlbDate(java.sql.Date.valueOf("2016-01-01"));
-		
-//		try {
-//			pa1.setAlbDate((Date) new SimpleDateFormat("yyyy-MM-dd").parse("2016-08-07"));
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-//		byte[] pic = getPictureByteArray("items/family.png");
-//		pa1.setAlbPhoto(pic);
-		
+		byte[] pic = getPictureByteArray("./items/family.png");
+		pa1.setAlbPhoto(pic);
+	
 		dao.insert(pa1);
 		
-		//==查詢=================================
-		List<PhotoAlbumVO> list = dao.getAll();
-		for (PhotoAlbumVO pha : list) {
-			System.out.print(pha.getAlbNo() + ",");
-			System.out.print(pha.getMemNo() + ",");
-			System.out.print(pha.getAlbName() + ",");
-			//System.out.print(pha.getAlbPhoto() + ",");
-			System.out.print(pha.getAlbDate() + ",");
-
-			System.out.println();
-		}
+		//==修改=================================
+//		PhotoAlbumVO pa2 = new PhotoAlbumVO();
+//		pa2.setAlbName("2022全家旅行");
+//		pa2.setAlbNo(4);
+//		pa2.setMemNo(105);
+//		pa2.setAlbDate(java.sql.Date.valueOf("2022-01-01"));
+//		byte[] pic2 = getPictureByteArray("./items/family2.png");
+//		pa2.setAlbPhoto(pic2);
+//		
+//		dao.update(pa2);
+//		System.out.println("更新完成");
+		
+		//==刪除=================================
+//		dao.delete(4);
+//		System.out.print(dao.delete(4)); //刪除成功回傳1; 刪除失敗則回傳-1
+		
+		//==查單筆=================================
+//		PhotoAlbumVO pa3 = dao.findByPrimaryKey(1);
+//		System.out.println("===========================================================");
+//		System.out.print(pa3.getAlbNo() + ",");
+//		System.out.print(pa3.getMemNo() + ",");
+//		System.out.print(pa3.getAlbName() + ",");
+//		System.out.print(pa3.getAlbPhoto() + ",");
+//		System.out.print(pa3.getAlbDate());
+			
+		//==查多筆=================================
+//		List<PhotoAlbumVO> list = dao.getAll();
+//		System.out.println("===========================================================");
+//		for (PhotoAlbumVO pha : list) {
+//			System.out.print(pha.getAlbNo() + ",");
+//			System.out.print(pha.getMemNo() + ",");
+//			System.out.print(pha.getAlbName() + ",");
+//			System.out.print(pha.getAlbPhoto() + ",");
+//			System.out.print(pha.getAlbDate());
+//			System.out.println();			
+//		}	
 		
 	}
+	
 	//新增圖片的方法============================================================
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);

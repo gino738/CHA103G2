@@ -6,10 +6,9 @@ import java.util.List;
 public interface PhotoAlbumDAO_interface {
     public void insert(PhotoAlbumVO photoAlbumVO);
     public void update(PhotoAlbumVO photoAlbumVO);
-    public void delete(Integer albNo);
+    public Integer delete(Integer albNo);
     public PhotoAlbumVO findByPrimaryKey(Integer albNo);
     public List<PhotoAlbumVO> getAll();
-    //萬用複合查詢(傳入參數型態Map)(回傳 List)
-//  public List<EmpVO> getAll(Map<String, String[]> map); 
+    //萬用複合查詢(傳入參數型態Map)(回傳 List) 
 
 }
