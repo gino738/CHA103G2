@@ -4,7 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.cha103g2.*;
+import com.cha103g2.util.HibernateUtil;
 
 public class InitializerListener implements ServletContextListener {
 

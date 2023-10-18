@@ -4,12 +4,15 @@
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jdbcsample?serverTimezone=Asia/Taipei</property>
+    <!--
+         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cha103g2?serverTimezone=Asia/Taipei</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">cha103</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    	
+   			-->
+    	<property name="connection.datasource">java:comp/env/jdbc/TestDB</property>
+    	 
     	<property name="hibernate.show_sql">true</property>
     	
     	<property name="hibernate.format_sql">true</property>
@@ -17,6 +20,6 @@
     	<property name="hibernate.hbm2ddl.auto">validate</property>
     
     	<property name="hibernate.current_session_context_class">thread</property>
-    	<mapping class="idv.cha103g2.model.Dept"/>
+    	<mapping class="com.cha103g2.roomNum.entity.RoomNum"/>
     </session-factory>
 </hibernate-configuration>

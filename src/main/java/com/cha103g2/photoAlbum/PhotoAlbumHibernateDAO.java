@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import util.HibernateUtil;
+
+import com.cha103g2.util.HibernateUtil;
 
 public class PhotoAlbumHibernateDAO implements PhotoAlbumDAO_interface{
 	//不用再下SQL指令, 載入驅動, 關閉連線
