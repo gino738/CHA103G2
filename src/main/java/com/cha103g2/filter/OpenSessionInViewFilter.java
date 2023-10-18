@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebFilter;
 
 import org.hibernate.SessionFactory;
 
-import com.cha103g2.*;
+import com.cha103g2.util.HibernateUtil;
 
 @WebFilter("/*")
 public class OpenSessionInViewFilter implements Filter {

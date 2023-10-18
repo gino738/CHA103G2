@@ -1,16 +1,19 @@
-package com.cha103g2.roomNum;
+package com.cha103g2.roomNum.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "room_num")
-public class RoomNumVO implements java.io.Serializable{
+public class RoomNum implements java.io.Serializable{
 	
 
 	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="r_num")
 	private Integer rNum;
 	
@@ -26,11 +29,11 @@ public class RoomNumVO implements java.io.Serializable{
 	@Column(name="room_status")
 	private byte roomStatus;
 	
-	public RoomNumVO() {
+	public RoomNum() {
 		super();		
 	}
 
-	public RoomNumVO(Integer rNum, Integer roomTypeNo, Integer roomOrderNo, String checkInName, byte roomStatus) {
+	public RoomNum(Integer rNum, Integer roomTypeNo, Integer roomOrderNo, String checkInName, byte roomStatus) {
 		super();
 		this.rNum = rNum;
 		this.roomTypeNo = roomTypeNo;
@@ -69,6 +72,12 @@ public class RoomNumVO implements java.io.Serializable{
 	}
 	public void setRoomStatus(byte roomStatus) {
 		this.roomStatus = roomStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "RoomNum [rNum=" + rNum + ", roomTypeNo=" + roomTypeNo + ", roomOrderNo=" + roomOrderNo
+				+ ", checkInName=" + checkInName + ", roomStatus=" + roomStatus + "]";
 	}
 	
 }
