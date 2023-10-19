@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main/main.css">
+<title>Hibernate Demo</title>
+</head>
+<body>
+	<h1>部門管理</h1>
+	<h2>部門系統</h2>
+	<a href="${pageContext.request.contextPath}/department/dept.do?action=getAll">查詢所有部門</a>
+	<br><br>
+	<h3><b>複合查詢 (使用 Criteria Query)：</b></h3>
+	<form action="${pageContext.request.contextPath}/department/dept.do" method="post">
+		<p><label>部門名稱模糊查詢：</label></p>
+		<input type="text" name="ename"><br>
+		<p><label>部門名稱：</label></p>
+		<select name="job">
+			<option value="">選取部門</option>
+			<option value="sales">業務部</option>
+			<option value="roomteam">房務部</option>
+			<option value="hr">人資部</option>
+			<option value="planning">企劃部</option>
+		</select>
+
+	</form>
+</body>
+</html>

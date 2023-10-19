@@ -1,4 +1,4 @@
-package com.cha103g2.department;
+package com.cha103g2.department.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.cha103g2.department.entity.DeptVO;
 
 
 public class DeptJDBCDAO implements DeptDAO_interface{
@@ -30,7 +32,7 @@ public class DeptJDBCDAO implements DeptDAO_interface{
 	}
 	//新增==========================================================
 	@Override
-	public void insert(DeptVO deptVO) {
+	public Integer insert(DeptVO deptVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -41,19 +43,22 @@ public class DeptJDBCDAO implements DeptDAO_interface{
 
 			pstmt.setInt(1, deptVO.getDeptNo());
 			pstmt.setString(2, deptVO.getDeptName());
-
+			
 			pstmt.executeUpdate();
+			return 1;
 		} catch (SQLException se) {
 			se.printStackTrace();
+			
 			// Clean up JDBC resources
 		} finally {
 			closeResources(con, pstmt, null);
 		}
+		return -1;
 		
 	}
 	//修改==========================================================
 	@Override
-	public void update(DeptVO deptVO) {
+	public Integer update(DeptVO deptVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -65,17 +70,19 @@ public class DeptJDBCDAO implements DeptDAO_interface{
 			pstmt.setInt(2, deptVO.getDeptNo());
 
 			pstmt.executeUpdate();
+			return 1;
 		} catch (SQLException se) {
 			se.printStackTrace();
 			// Clean up JDBC resources
 		} finally {
 			closeResources(con, pstmt, null);
 		}
+		return -1;
 		
 	}
 	//刪除==========================================================
 	@Override
-	public void delete(int deptNo) {
+	public Integer delete(Integer deptNo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -86,16 +93,18 @@ public class DeptJDBCDAO implements DeptDAO_interface{
 			pstmt.setInt(1, deptNo);
 
 			pstmt.executeUpdate();
+			return 1;
 		} catch (SQLException se) {
 			se.printStackTrace();
 			// Clean up JDBC resources
 		} finally {
 			closeResources(con, pstmt, null);
 		}
+		return -1;
 	}
 	//查單筆==========================================================
 	@Override
-	public DeptVO findByPrimartKey(int deptNo) {
+	public DeptVO findByPrimaryKey(Integer deptNo) {
 		DeptVO deptvo = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -197,21 +206,26 @@ public class DeptJDBCDAO implements DeptDAO_interface{
 //		dao.update(deptVO2);
 		
 		//刪除
-//		dao.delete(107);
+//		dao.delete(106);
 		
 		//查單筆
-//		DeptVO deptVO3 = dao.findByPrimartKey(101);
+//		DeptVO deptVO3 = dao.findByPrimaryKey(101);
 //		System.out.print(deptVO3.getDeptNo() + ",");
 //		System.out.print(deptVO3.getDeptName());
 		
 		//查多筆
-		List<DeptVO> list = dao.getAll();
-		for (DeptVO deptVO : list) { //把list中的DeptVO物件印出
-			System.out.print(deptVO.getDeptNo() + ","); //印DeptNo
-			System.out.print(deptVO.getDeptName()); //印DeptName
-			System.out.println();
-		}
+//		List<DeptVO> list = dao.getAll();
+//		for (DeptVO deptVO : list) { //把list中的DeptVO物件印出
+//			System.out.print(deptVO.getDeptNo() + ","); //印DeptNo
+//			System.out.print(deptVO.getDeptName()); //印DeptName
+//			System.out.println();
+//		}
 		
+	}
+	@Override
+	public List<DeptVO> getAll(int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
