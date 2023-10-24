@@ -1,4 +1,4 @@
-package com.cha103g2.photoAlbum;
+package com.cha103g2.photoAlbum.entity;
 
 import java.sql.Blob;
 import java.sql.Date;

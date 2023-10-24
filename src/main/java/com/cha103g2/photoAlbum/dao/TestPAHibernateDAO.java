@@ -1,4 +1,4 @@
-package com.cha103g2.photoAlbum;
+package com.cha103g2.photoAlbum.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import com.cha103g2.photoAlbum.entity.PhotoAlbumVO;
+
 public class TestPAHibernateDAO {
 	
 	public static void main(String[] args) throws IOException {
@@ -14,15 +16,15 @@ public class TestPAHibernateDAO {
 		PhotoAlbumDAO_interface dao = new PhotoAlbumHibernateDAO();
 		
 		//==新增=================================
-		PhotoAlbumVO pa1 = new PhotoAlbumVO();
-		pa1.setAlbName("2023全家旅行");
-		pa1.setAlbNo(4);
-		pa1.setMemNo(104);
-		pa1.setAlbDate(java.sql.Date.valueOf("2016-01-01"));
-		byte[] pic = getPictureByteArray("./items/family.png");
-		pa1.setAlbPhoto(pic);
-	
-		dao.insert(pa1);
+//		PhotoAlbumVO pa1 = new PhotoAlbumVO();
+//		pa1.setAlbName("2023全家旅行");
+//		pa1.setAlbNo(4);
+//		pa1.setMemNo(104);
+//		pa1.setAlbDate(java.sql.Date.valueOf("2016-01-01"));
+//		byte[] pic = getPictureByteArray("./items/family.png");
+//		pa1.setAlbPhoto(pic);
+//	
+//		dao.insert(pa1);
 		
 		//==修改=================================
 //		PhotoAlbumVO pa2 = new PhotoAlbumVO();
@@ -41,25 +43,25 @@ public class TestPAHibernateDAO {
 //		System.out.print(dao.delete(4)); //刪除成功回傳1; 刪除失敗則回傳-1
 		
 		//==查單筆=================================
-//		PhotoAlbumVO pa3 = dao.findByPrimaryKey(1);
-//		System.out.println("===========================================================");
-//		System.out.print(pa3.getAlbNo() + ",");
-//		System.out.print(pa3.getMemNo() + ",");
-//		System.out.print(pa3.getAlbName() + ",");
-//		System.out.print(pa3.getAlbPhoto() + ",");
-//		System.out.print(pa3.getAlbDate());
+		PhotoAlbumVO pa3 = dao.findByPrimaryKey(1);
+		System.out.println("===========================================================");
+		System.out.print(pa3.getAlbNo() + ",");
+		System.out.print(pa3.getMemNo() + ",");
+		System.out.print(pa3.getAlbName() + ",");
+		System.out.print(pa3.getAlbPhoto() + ",");
+		System.out.print(pa3.getAlbDate());
 			
 		//==查多筆=================================
-//		List<PhotoAlbumVO> list = dao.getAll();
-//		System.out.println("===========================================================");
-//		for (PhotoAlbumVO pha : list) {
-//			System.out.print(pha.getAlbNo() + ",");
-//			System.out.print(pha.getMemNo() + ",");
-//			System.out.print(pha.getAlbName() + ",");
-//			System.out.print(pha.getAlbPhoto() + ",");
-//			System.out.print(pha.getAlbDate());
-//			System.out.println();			
-//		}	
+		List<PhotoAlbumVO> list = dao.getAll();
+		System.out.println("===========================================================");
+		for (PhotoAlbumVO pha : list) {
+			System.out.print(pha.getAlbNo() + ",");
+			System.out.print(pha.getMemNo() + ",");
+			System.out.print(pha.getAlbName() + ",");
+			System.out.print(pha.getAlbPhoto() + ",");
+			System.out.print(pha.getAlbDate());
+			System.out.println();			
+		}	
 		
 	}
 	

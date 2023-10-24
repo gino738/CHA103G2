@@ -227,6 +227,16 @@ public class DeptJDBCDAO implements DeptDAO_interface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public long getTotal() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public List<DeptVO> getDeptsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

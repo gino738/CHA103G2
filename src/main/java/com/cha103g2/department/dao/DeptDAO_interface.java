@@ -19,5 +19,7 @@ public interface DeptDAO_interface {
 	List<DeptVO> getAll(int currentPage);
 	
 	long getTotal();
+	
+	List<DeptVO> getDeptsList();
 
 }

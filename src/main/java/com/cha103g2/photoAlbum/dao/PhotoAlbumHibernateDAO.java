@@ -1,10 +1,11 @@
-package com.cha103g2.photoAlbum;
+package com.cha103g2.photoAlbum.dao;
 
 import java.util.List;
 
 import org.hibernate.Session;
 
-import com.cha103g2.HibernateUtil;
+import com.cha103g2.photoAlbum.entity.PhotoAlbumVO;
+import com.cha103g2.util.HibernateUtil;
 
 
 
