@@ -38,8 +38,8 @@
     <c:forEach var="pha" items="${phaList}">	
     <div class="album">
         <div class="album-cover">
-        	<%-- ${pha.albPhoto}
-        	<img src="data:image/jpeg;base64, ${pha.albCover}" alt="相簿封面">--%>
+        	 <%--${pha.albPhoto}--%>
+        	<img src="<%=request.getContextPath()%>/dbg.do?id=${pha.albNo}" alt="相簿封面">
             <!-- 预览图将显示在这里 -->
         </div>
         <div class="album-details">
