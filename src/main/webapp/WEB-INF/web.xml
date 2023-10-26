@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	version="4.0" metadata-complete="true">
-	 <display-name>paradisiac</display-name>
+	 <display-name>cha103g2</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 			<welcome-file>index.xhtml</welcome-file>
@@ -23,14 +23,45 @@
 		<servlet-name>RoomNumServlet</servlet-name>
 		<url-pattern>/roomnum/roomnum.do</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	
+	<servlet>
 		<servlet-name>DeptServlet</servlet-name>
 		<servlet-class>com.cha103g2.department.controller.DeptServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DeptServlet</servlet-name>
-		<url-pattern>/department/dept.do</url-pattern>
+		<url-pattern>/dept.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EmpServlet</servlet-name>
+		<servlet-class>com.cha103g2.employee.controller.EmpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmpServlet</servlet-name>
+		<url-pattern>/emp.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PhaServlet</servlet-name>
+		<servlet-class>com.cha103g2.photoAlbum.controller.PhaServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PhaServlet</servlet-name>
+		<url-pattern>/pha.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Test_DataSource</servlet-name>
+		<servlet-class>com.cha103g2.employee.Test_DataSource</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Test_DataSource</servlet-name>
+		<url-pattern>/jdbc/TestDB2</url-pattern>
+	</servlet-mapping>
+	
+
+		
 	<listener>
 		<listener-class>com.cha103g2.listener.InitializerListener</listener-class>
 	</listener>

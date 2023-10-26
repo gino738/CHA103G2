@@ -1,95 +1,86 @@
 package com.cha103g2.photoAlbum.dao;
 
+import static com.cha103g2.department.service.Constants.PAGE_MAX_RESULT;
+
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import com.cha103g2.photoAlbum.entity.PhotoAlbumVO;
 import com.cha103g2.util.HibernateUtil;
+import com.cha103g2.filter.OpenSessionInViewFilter;
 
 
 
 public class PhotoAlbumHibernateDAO implements PhotoAlbumDAO_interface{
 	//不用再下SQL指令, 載入驅動, 關閉連線
 	//不用再pstmt裡set參數
+	private SessionFactory factory;
+
+	public PhotoAlbumHibernateDAO(SessionFactory factory) {
+		this.factory = factory;
+	}
+	
+	private Session getSession() {
+		return factory.getCurrentSession();
+	}
+
 	
 	//===新增===============================================
 
 	@Override
-	public void insert(PhotoAlbumVO photoAlbumVO) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			Integer id = (Integer) session.save(photoAlbumVO);
-			session.getTransaction().commit();
-	
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
+	public int insert(PhotoAlbumVO phaVO) {
+		return (Integer) getSession().save(phaVO);	
 	}
 	//===修改===============================================
 	@Override
-	public void update(PhotoAlbumVO photoAlbumVO) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	public int update(PhotoAlbumVO phaVO) {
 		try {
-			session.beginTransaction();
-			session.update(photoAlbumVO);
-			session.getTransaction().commit();
+			getSession().update(phaVO);
+			return 1;
 		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}	
+			return -1;
+		}		
 	}
 	//===刪除===============================================
 	@Override
-	public Integer delete(Integer albNo) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			PhotoAlbumVO paVO = session.get(PhotoAlbumVO.class, albNo);
-			if (paVO != null) { //PK找的到這筆資料
-				session.delete(paVO);
-				System.out.println("成功刪除");
-			}
-			session.getTransaction().commit();
-			return 1; //可以用1 or -1 搭配if涵式看要印回傳成功or失敗
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
+	public int delete(Integer albNo) {
+		PhotoAlbumVO phaVO = getSession().get(PhotoAlbumVO.class, albNo);
+		if (phaVO != null) {
+			getSession().delete(phaVO);
+			// 回傳給 service，1代表刪除成功
+			return 1;
+		} else {
+			// 回傳給 service，-1代表刪除失敗
+			return -1;
 		}
-		return -1;
 		
 	}
 	//===查單筆===============================================
 	@Override
 	public PhotoAlbumVO findByPrimaryKey(Integer albNo) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			PhotoAlbumVO photoAlbumVO = session.get(PhotoAlbumVO.class, albNo); //在PhotoAlbumVO(已設定好Column對應table)中找對應PK是albNo資料
-			session.getTransaction().commit();
-			return photoAlbumVO;
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		return null;//找不到PK
+		return getSession().get(PhotoAlbumVO.class, albNo);
+	}
+	//下拉式選單在用的getAll
+	@Override
+	public List<PhotoAlbumVO> getAll() {
+		List phaList = getSession().createQuery("from PhotoAlbumVO", PhotoAlbumVO.class).list();
+		return phaList;
 	}
 	//===查多筆===============================================
 	@Override
-	public List<PhotoAlbumVO> getAll() {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			List<PhotoAlbumVO> list = session.createQuery("from PhotoAlbumVO", PhotoAlbumVO.class).list(); //(createQuery: SQL指令 from 哪個class,類別名稱)
-			session.getTransaction().commit();
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		return null;
+	public List<PhotoAlbumVO> getAll(int currentPage) {
+		int first = (currentPage - 1) * PAGE_MAX_RESULT;
+		return getSession().createQuery("from PhotoAlbumVO", PhotoAlbumVO.class)
+				.setFirstResult(first)
+				.setMaxResults(PAGE_MAX_RESULT)
+				.list();
+	}
+	
+	@Override
+	public long getTotal() {
+		return getSession().createQuery("select count(*) from PhotoAlbumVO", Long.class).uniqueResult();
 	}
 
 	

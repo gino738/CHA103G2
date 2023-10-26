@@ -12,6 +12,46 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
+	<servlet>
+		<servlet-name>RoomNumServlet</servlet-name>
+		<servlet-class>com.cha103g2.roomNum.controller.RoomNumServlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>RoomNumServlet</servlet-name>
+		<url-pattern>/roomnum/roomnum.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>DeptServlet</servlet-name>
+		<servlet-class>com.cha103g2.department.controller.DeptServlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>DeptServlet</servlet-name>
+		<url-pattern>/dept.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EmpServlet</servlet-name>
+		<servlet-class>com.cha103g2.employee.controller.EmpServlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>EmpServlet</servlet-name>
+		<url-pattern>/emp.do</url-pattern>
+	</servlet-mapping>
+	
+
+	
+	<resource-ref>
+	    <description>DB Connection</description>
+	    <res-ref-name>jdbc/TestDB</res-ref-name>
+	    <res-type>javax.sql.DataSource</res-type>
+	    <res-auth>Container</res-auth>
+  	</resource-ref>
+ 
+
+	
+	
 	<listener>
 		<listener-class>com.cha103g2.listener.InitializerListener</listener-class>
 	</listener>
@@ -24,4 +64,5 @@
         <filter-name>SessionInViewFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+   
 </web-app>
