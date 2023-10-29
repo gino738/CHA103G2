@@ -31,7 +31,12 @@ public class PhotoAlbumHibernateDAO implements PhotoAlbumDAO_interface{
 
 	@Override
 	public int insert(PhotoAlbumVO phaVO) {
-		return (Integer) getSession().save(phaVO);	
+		try {
+			getSession().save(phaVO);
+			return 1;
+		} catch (Exception e) {
+			return -1;
+		}		 	
 	}
 	//===修改===============================================
 	@Override

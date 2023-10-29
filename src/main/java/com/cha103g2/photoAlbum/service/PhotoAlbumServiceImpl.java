@@ -1,6 +1,7 @@
 package com.cha103g2.photoAlbum.service;
 
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,12 +17,17 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumService_interface{
 	
 	public PhotoAlbumServiceImpl() {
 		dao = new PhotoAlbumHibernateDAO(HibernateUtil.getSessionFactory());
+
 	}
 
 	@Override
-	public PhotoAlbumVO addPha(PhotoAlbumVO phaVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public int addPha(PhotoAlbumVO phaVO) {
+		try {
+			dao.insert(phaVO);
+			return 1;
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 
 	@Override
@@ -50,7 +56,7 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumService_interface{
 	@Override
 	public int getPageTotal() {
 		long total = dao.getTotal();
-		// 計算Emp數量每頁3筆的話總共有幾頁
+		// 計算數量每頁3筆的話總共有幾頁
 		int pageQty = (int)(total % PAGE_MAX_RESULT == 0 ? (total / PAGE_MAX_RESULT) : (total / PAGE_MAX_RESULT + 1));
 		return pageQty;
 	}

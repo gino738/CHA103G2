@@ -33,50 +33,42 @@
 		<br></li>
 		<h2>相簿查詢</h2>
 		<li>
-			<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/pha.do">
+			<%--<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/pha.do">
 				<b>輸入相簿編號</b> <input type="text" name="phaNo">
 				<!-- 所有請求名稱用hidden送出 -->
 				<input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">
-			</FORM>
+			 </FORM>
 			<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/pha.do">
 				<b>輸入建立日期</b> <input type="date" name="albDate"> <input
 					type="hidden" name="action" value="getOne_For_Display"> <input
 					type="submit" value="送出">
-			</FORM>
+			</FORM>--%>
 		</li>
 	</ul>
 
-	<h2>相簿新增</h2>
+	
 	<ul>
+		<h2>相簿新增</h2>
 		<li>
-			<form action="${pageContext.request.contextPath}/phaServlet"
-				method="post" enctype="multipart/form-data">
-				<label for="albNo">相簿編號：</label> <input type="text" id="albNo"
-					name="albNo" required><br>
-				<br> <label for="memNo">會員編號：</label> <input type
-					text" id="memNo" name="memNo" required><br>
-				<br> <label for="albName">相簿名稱：</label> <input type="text"
-					id="albName" name="albName" required><br>
-				<br> <label for="albPhoto">相簿封面：</label> <input type="file"
-					id="albPhoto" name="albPhoto" accept="image/*" required><br>
-				<br> <input type="hidden" name="base64Image"
-					value="${base64Image}">
-				<div>
-					<label>相簿建立時間：</label> <input type="date" name="albDate" required>
-				</div>
+			<form action="${pageContext.request.contextPath}/pha.do" method="post" enctype="multipart/form-data">
+				<label for="albNo">相簿編號：</label> <input type="text" id="albNo" name="albNo" required><br>
+				<br> <label for="memNo">會員編號：</label> <input type="text" id="memNo" name="memNo" required><br>
+				<br> <label for="albName">相簿名稱：</label> <input type="text" id="albName" name="albName" required><br>
+				<br> <label for="albPhoto">相簿封面：</label> <input type="file" id="albPhoto" name="albPhoto" accept="image/*" required onchange="showPreview"><br>
+				<br> <label>相簿建立時間：</label> <input type="date" name="albDate" required>
 				<br>
-
+				<br>
 				<div>
-					<label>相簿封面預覽：</label> <img id="preview"
-						style="max-width: 300px; max-height: 300px;"><br>
+					<label>相簿封面預覽：</label> <img id="preview" style="max-width: 300px; max-height: 300px;" ><br>	
 				</div>
+				<input type="hidden" name="action" value="insert">
 				<br> <input type="submit" value="建立相簿">
 
 			</form>
 		</li>
 	</ul>
-	<script>
+	<script>-
         document.getElementById('albPhoto').addEventListener('change', function(e) {
             var preview = document.getElementById('preview');
             if (e.target.files.length > 0) {
@@ -86,7 +78,21 @@
             } else {
                 preview.src = '';
             }
-        });
+        }
+
     </script>
+    <%--<script type="text/javascript">
+	//顯示預覽圖
+	var showPreview = function(event){
+		var reader = new FileReader();
+		reader.onload = function(){
+			var output = document.getElementById('output');
+			output.innerHTML = "<img width='100' id ='preview'>";
+			document.getElementById("preview").src = reader.result;
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	}
+
+	</script>--%>
 </body>
 </html>

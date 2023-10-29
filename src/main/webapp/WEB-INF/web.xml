@@ -52,6 +52,17 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>DBGifReader2</servlet-name>
+		<servlet-class>com.cha103g2.photoAlbum.controller.DBGifReader2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DBGifReader2</servlet-name>
+		<url-pattern>/dbg.do</url-pattern>
+	</servlet-mapping>
+	
+
+	
+	<servlet>
 		<servlet-name>Test_DataSource</servlet-name>
 		<servlet-class>com.cha103g2.employee.Test_DataSource</servlet-class>
 	</servlet>

@@ -56,14 +56,14 @@ public class DeptDAOImpl implements DeptDAO_interface{
 		return getSession().get(DeptVO.class, deptNo);
 	}
 
-	@Override
+	@Override//用來顯示部門下拉選單
 	public List<DeptVO> getAll() {
 		List deptList = getSession().createQuery("from DeptVO", DeptVO.class).list();
 		return deptList;
 
 	}
 
-	@Override
+	@Override//顯示在查全部頁面
 	public List<DeptVO> getAll(int currentPage) {
 		int first = (currentPage - 1) * PAGE_MAX_RESULT;
 //		Session session = getSession();

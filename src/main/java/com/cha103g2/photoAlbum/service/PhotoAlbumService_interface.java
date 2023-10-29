@@ -1,12 +1,13 @@
 package com.cha103g2.photoAlbum.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.cha103g2.photoAlbum.entity.PhotoAlbumVO;
 
 public interface PhotoAlbumService_interface {
-	PhotoAlbumVO addPha(PhotoAlbumVO phaVO);
+	int addPha(PhotoAlbumVO phaVO);
 	
 	PhotoAlbumVO updatePha(PhotoAlbumVO phaVO);
 	

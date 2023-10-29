@@ -7,6 +7,7 @@ import com.cha103g2.photoAlbum.entity.PhotoAlbumVO;
 
 //此介面定義對資料庫的相關存取抽象方法
 public interface PhotoAlbumDAO_interface {
+	
     public int insert(PhotoAlbumVO photoAlbumVO);
     
     public int update(PhotoAlbumVO photoAlbumVO);
