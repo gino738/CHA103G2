@@ -60,9 +60,7 @@
 	<c:forEach var="pha" items="${phaList}">
 		<div class="album">
 			<div style="" class="album-cover">
-				<img src="<%=request.getContextPath()%>/dbg.do?alb_no=${pha.albNo}"
-					alt="相簿封面">
-				<!--预览图将显示在这里 -->
+				<img src="<%=request.getContextPath()%>/dbg.do?alb_no=${pha.albNo}" alt="相簿封面">
 			</div>
 			<div class="album-details">
 				<table>
@@ -90,21 +88,21 @@
 			<table>
 				<tr>
 					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/photoAlbum"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="修改"> <input type="hidden"
-								name="empno" value="${phaVO.phaNo}"> <input
-								type="hidden" name="action" value="getOne_For_Update">
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pha.do" style="margin-bottom: 0px;">
+							<input type="submit" value="修改"> <input type="hidden" name="albNo" value="${pha.albNo}"> 
+							<input type="hidden" name="action" value="getOne_For_Update">
 						</FORM>
 					</td>
 					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/photoAlbum"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="刪除"> <input type="hidden"
-								name="phaNo" value="${phaVO.phaNo}"> <input
-								type="hidden" name="action" value="delete">
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pha.do" style="margin-bottom: 0px;">
+							<input type="submit" value="刪除"> <input type="hidden" name="albNo" value="${pha.albNo}"> 
+							<input type="hidden" name="action" value="delete">
+						</FORM>
+					</td>
+					<td>
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pha.do" style="margin-bottom: 0px;">
+							<input type="submit" value="新增相片"> <input type="hidden" name="albNo" value="${pha.albNo}"> 
+							<input type="hidden" name="action" value="insertPhoto">
 						</FORM>
 					</td>
 				</tr>

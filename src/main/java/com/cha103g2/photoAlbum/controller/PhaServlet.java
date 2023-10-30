@@ -120,6 +120,29 @@ public class PhaServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(forwardPath); // 新增成功後轉交
 			successView.forward(req, res);
 		}
+		//新增相片(先找相本PK再forward(req, res)出去================================================
+		if("insertPhoto".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			/***************************1.接收請求參數****************************************/
+			Integer albNo = Integer.valueOf(req.getParameter("albNo"));
+			/***************************2.開始查詢資料****************************************/
+			PhotoAlbumVO phaVO = phaSvc.getPhaByPK(albNo);
+			/***************************3.查詢完成,準備轉交(Send the Success view)************/
+			req.setAttribute("phaVO", phaVO);
+			forwardPath = "/photo/addPhoto.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(forwardPath);// 成功轉交 update_emp_input.jsp
+			successView.forward(req, res);
+		}
+		//刪除==========================================================
+		if("delete".equals(action)) {
+			/***************************1.接收請求參數****************************************/
+			Integer albNo = Integer.valueOf(req.getParameter("albNo"));
+			/***************************2.開始查詢資料****************************************/
+			PhotoAlbumVO phaVO = phaSvc.getPhaByPK(albNo);
+		}
 		
 		
 	}//doPost

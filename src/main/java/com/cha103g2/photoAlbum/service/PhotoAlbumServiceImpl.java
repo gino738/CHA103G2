@@ -44,8 +44,7 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumService_interface{
 
 	@Override
 	public PhotoAlbumVO getPhaByPK(Integer albNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.findByPrimaryKey(albNo);
 	}
 
 	@Override 

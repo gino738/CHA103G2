@@ -66,8 +66,6 @@ public class DeptDAOImpl implements DeptDAO_interface{
 	@Override//顯示在查全部頁面
 	public List<DeptVO> getAll(int currentPage) {
 		int first = (currentPage - 1) * PAGE_MAX_RESULT;
-//		Session session = getSession();
-//		session.beginTransaction();
 		return getSession().createQuery("from DeptVO", DeptVO.class)
 				.setFirstResult(first)
 				.setMaxResults(PAGE_MAX_RESULT)

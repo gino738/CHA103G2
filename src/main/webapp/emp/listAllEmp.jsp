@@ -82,7 +82,7 @@
 		<th>員工性別</th>
 		<th>員工電話</th>
 	</tr>
-	<%@ include file="page1.file" %> 
+<%@ include file="page1.file" %> 
 	
 	<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 
