@@ -18,5 +18,7 @@ public interface PhotoService {
 
 	int getPageTotal();
 	
+	void addPhoto(List<PhotoVO> photoList);
+	
 
 }

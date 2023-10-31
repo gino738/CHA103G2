@@ -36,10 +36,8 @@ public class PhotoVO implements java.io.Serializable{
 		
 	}
 	
-	public PhotoVO(Integer albNo, String photoName, byte[] photo, Date photoDate){
+	public PhotoVO(Integer albNo, Date photoDate){
 		this.albNo = albNo;
-		this.photoName = photoName;
-		this.photo = photo;
 		this.photoDate = photoDate;
 	}
 	
@@ -72,7 +70,9 @@ public class PhotoVO implements java.io.Serializable{
 	}
 
 	public void setPhoto(byte[] photo) {
+		System.out.println("VO:call setPhoto()===================");
 		this.photo = photo;
+		
 	}
 
 	public Date getPhotoDate() {

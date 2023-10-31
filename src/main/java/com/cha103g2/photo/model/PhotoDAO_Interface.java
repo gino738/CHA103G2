@@ -19,5 +19,7 @@ public interface PhotoDAO_Interface {
 	long getTotal();
 	
 	List<PhotoVO> getPhotosList();
+	
+	public void insert(List<PhotoVO> photoList);
 
 }

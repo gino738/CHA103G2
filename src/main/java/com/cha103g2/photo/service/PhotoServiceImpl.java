@@ -47,4 +47,11 @@ public class PhotoServiceImpl implements PhotoService{
 		return 0;
 	}
 
+	@Override //一次新增多張相片
+	public void addPhoto(List<PhotoVO> photoList) {
+		System.out.println("service:call insert()===================");
+		dao.insert(photoList);
+		
+	}
+
 }

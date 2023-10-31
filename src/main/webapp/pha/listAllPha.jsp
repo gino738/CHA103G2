@@ -100,9 +100,9 @@
 						</FORM>
 					</td>
 					<td>
-						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pha.do" style="margin-bottom: 0px;">
-							<input type="submit" value="新增相片"> <input type="hidden" name="albNo" value="${pha.albNo}"> 
+						<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pha.do" style="margin-bottom: 0px;">			
 							<input type="hidden" name="action" value="insertPhoto">
+							<input type="submit" value="新增相片"> <input type="hidden" name="albNo" value="${pha.albNo}"> 
 						</FORM>
 					</td>
 				</tr>

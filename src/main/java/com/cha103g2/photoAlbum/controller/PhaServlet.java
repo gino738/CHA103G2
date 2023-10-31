@@ -133,7 +133,7 @@ public class PhaServlet extends HttpServlet {
 			/***************************3.查詢完成,準備轉交(Send the Success view)************/
 			req.setAttribute("phaVO", phaVO);
 			forwardPath = "/photo/addPhoto.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(forwardPath);// 成功轉交 update_emp_input.jsp
+			RequestDispatcher successView = req.getRequestDispatcher(forwardPath);// 成功轉交
 			successView.forward(req, res);
 		}
 		//刪除==========================================================
