@@ -68,7 +68,7 @@
 			</form>
 		</li>
 	</ul>
-	<script>-
+	<script>
         document.getElementById('albPhoto').addEventListener('change', function(e) {
             var preview = document.getElementById('preview');
             if (e.target.files.length > 0) {

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,50 +43,60 @@ public class PhotoServlet extends HttpServlet {
 		
 		//新增相片===================================================
 		if("insert".equals(action)) {
-			//待處理錯誤處理
+			//錯誤處理
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
 			
-			
-			
+			Date photoDate = null;
+			try {
+				photoDate = Date.valueOf(req.getParameter("photoDate").trim());
+			}catch(IllegalArgumentException e) {
+				errorMsgs.add("請選擇相片日期");
+			}
+						
+			String photoName1 = req.getParameter("photoName1").trim();
+			String photoName2 = req.getParameter("photoName2").trim();
+			String photoName3 = req.getParameter("photoName3").trim();
+			if(photoName1.length() == 0 && photoName2.length() ==0 && photoName3.length() == 0) {
+				errorMsgs.add("請選擇一張照片");
+			}
+					
 			/***************************1.接收請求參數****************************************/
 			Integer albNo = Integer.valueOf(req.getParameter("albNo"));
-			Date photoDate = Date.valueOf(req.getParameter("photoDate"));
-
-			System.out.println("**servlet===================="+albNo);//***
-			String photoName1 = req.getParameter("photoName1").trim();		
-			String photoName2 = req.getParameter("photoName2").trim();
-			byte[] photo1 = null;
-			byte[] photo2 = null;
-			
-			Part part1 = req.getPart("photo1");
-			InputStream is1 = part1.getInputStream();
-			photo1 = new byte[is1.available()];
-			is1.read(photo1);
-			is1.close();
-			
-			Part part2 = req.getPart("photo2");
-			InputStream is2 = part2.getInputStream();
-			photo2 = new byte[is2.available()];
-			is2.read(photo2);
-			is2.close();
-			
-			//開始打包物件
-			PhotoVO photoVO1 = new PhotoVO();
-			photoVO1.setAlbNo(albNo);
-			photoVO1.setPhotoDate(photoDate);
-			photoVO1.setPhotoName(photoName1);
-			photoVO1.setPhoto(photo1);
-			
-			//PhotoVO photoVO2 = new PhotoVO(albNo, photoDate);
-			PhotoVO photoVO2 = new PhotoVO();
-			photoVO2.setAlbNo(albNo);
-			photoVO2.setPhotoDate(photoDate);
-			photoVO2.setPhotoName(photoName2);
-			photoVO2.setPhoto(photo2);
-			
+			photoDate = Date.valueOf(req.getParameter("photoDate"));
 			List<PhotoVO> photoList = new ArrayList<PhotoVO>();//ArrayList長度動態改變
-			photoList.add(photoVO1);
-			photoList.add(photoVO2);
-			System.out.println("**servlet===================="+photoVO1.getPhotoName());//***
+			
+			//有選到檔案才需要轉成byte並加到陣列中
+			if(photoName1.length() != 0) {				
+				Part part1 = req.getPart("photo1");
+				byte[] photo1 = transPhoto(part1);
+				
+				PhotoVO photoVO1 = new PhotoVO(albNo, photoDate);
+				photoVO1.setPhotoName(photoName1);
+				photoVO1.setPhoto(photo1);
+				photoList.add(photoVO1);
+			}
+			
+			if(photoName2.length() != 0) {				
+				Part part2 = req.getPart("photo2");
+				byte[] photo2 = transPhoto(part2);
+				
+				PhotoVO photoVO2 = new PhotoVO(albNo, photoDate);
+				photoVO2.setPhotoName(photoName2);
+				photoVO2.setPhoto(photo2);
+				photoList.add(photoVO2);
+			}
+			
+			if(photoName3.length() != 0) {				
+				Part part3 = req.getPart("photo3");
+				byte[] photo3 = transPhoto(part3);
+				
+				PhotoVO photoVO3 = new PhotoVO(albNo, photoDate);
+				photoVO3.setPhotoName(photoName3);
+				photoVO3.setPhoto(photo3);
+				photoList.add(photoVO3);
+			}
+
 			/***************************2.開始新增資料***************************************/
 			photoSvc.addPhoto(photoList);
 			
@@ -98,6 +109,17 @@ public class PhotoServlet extends HttpServlet {
 		
 		
 	}//dopost
+	
+	//轉換成圖片的方法
+	private byte[] transPhoto(Part part) throws IOException {
+		InputStream is = part.getInputStream();
+		byte[] photo = new byte[is.available()];
+		is.read(photo);
+		is.close();
+		return photo;
+		
+	}
+
 	
 
 }
