@@ -72,7 +72,6 @@ public class PhotoHiberbateDAO implements PhotoDAO_Interface{
 
 	@Override//一次新增多張相片
 	public void insert(List<PhotoVO> photoList) {
-		System.out.println("dao:call save()===================");
 		for(PhotoVO photoVO : photoList) {
 			getSession().save(photoVO); //把相片逐一取出新增進去
 		}

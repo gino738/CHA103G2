@@ -36,7 +36,6 @@ public class EmpServlet extends HttpServlet {
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.萬一有錯誤, 把錯誤訊息存在陣列中
 			req.setAttribute("errorMsgs", errorMsgs); //key是errorMsgs
 

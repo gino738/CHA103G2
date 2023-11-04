@@ -49,21 +49,22 @@ public class PhotoServlet extends HttpServlet {
 			
 			Date photoDate = null;
 			try {
-				photoDate = Date.valueOf(req.getParameter("photoDate").trim());
-			}catch(IllegalArgumentException e) {
+				photoDate =  java.sql.Date.valueOf(req.getParameter("photoDate").trim());
+			}catch(IllegalArgumentException e) {//Date.valueOf
 				errorMsgs.add("請選擇相片日期");
 			}
 						
 			String photoName1 = req.getParameter("photoName1").trim();
 			String photoName2 = req.getParameter("photoName2").trim();
 			String photoName3 = req.getParameter("photoName3").trim();
+			//至少選一個檔案
 			if(photoName1.length() == 0 && photoName2.length() ==0 && photoName3.length() == 0) {
 				errorMsgs.add("請選擇一張照片");
 			}
 					
 			/***************************1.接收請求參數****************************************/
 			Integer albNo = Integer.valueOf(req.getParameter("albNo"));
-			photoDate = Date.valueOf(req.getParameter("photoDate"));
+			photoDate =  java.sql.Date.valueOf(req.getParameter("photoDate"));
 			List<PhotoVO> photoList = new ArrayList<PhotoVO>();//ArrayList長度動態改變
 			
 			//有選到檔案才需要轉成byte並加到陣列中
@@ -105,7 +106,8 @@ public class PhotoServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(forwardPath); // 新增成功後轉交
 			successView.forward(req, res);
 			
-		}
+		}//新增相片
+		
 		
 		
 	}//dopost

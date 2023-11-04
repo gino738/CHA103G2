@@ -19,6 +19,9 @@ import java.io.FileInputStream;
 import com.cha103g2.photoAlbum.entity.PhotoAlbumVO;
 import com.cha103g2.photoAlbum.service.PhotoAlbumServiceImpl;
 import com.cha103g2.photoAlbum.service.PhotoAlbumService_interface;
+import com.cha103g2.util.HibernateUtil;
+import com.cha103g2.photo.model.PhoWithAlbDTO;
+import com.cha103g2.photoAlbum.dao.*;
 
 /**
  * Servlet implementation class phaService
@@ -54,7 +57,7 @@ public class PhaServlet extends HttpServlet {
 //			RequestDispatcher dispatcher = req.getRequestDispatcher(forwardPath);
 //			dispatcher.forward(req, res);
 		}
-		//新增==========================================================
+		//新增相簿=======================================================
 		if("insert".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -143,7 +146,15 @@ public class PhaServlet extends HttpServlet {
 			/***************************2.開始查詢資料****************************************/
 			PhotoAlbumVO phaVO = phaSvc.getPhaByPK(albNo);
 		}
-		
+		//查單筆相簿(含所有照片)=====================================================
+		if("getOne_For_Display".equals(action)) {
+			
+			forwardPath = getAllPho(req, res);
+			res.setContentType("text/html; charset=UTF-8");
+			RequestDispatcher dispatcher = req.getRequestDispatcher(forwardPath);
+			dispatcher.forward(req, res);
+
+		}
 		
 	}//doPost
 	//查全部可瀏覽的頁數===========================================================
@@ -164,27 +175,51 @@ public class PhaServlet extends HttpServlet {
 		return "/pha/listAllPha.jsp";
 
 	}
-	//新增完會跳轉最後一頁===========================================================
-	private String getAllPha(HttpServletRequest req, HttpServletResponse res, int targetPage) {
-		String page = req.getParameter("page"); //網址列會有page=空(第一頁) or 第幾頁
+	//查相簿的所有照片=============================================================
+	private String getAllPho(HttpServletRequest req, HttpServletResponse res) {
+		
+		Integer albNo = Integer.valueOf(req.getParameter("albNo"));
+		String page = req.getParameter("page");//網址列會有page=空(第一頁) or 第幾頁
 		int currentPage = (page == null) ? 1 : Integer.parseInt(page); //如果第一次跳轉則page會是空值, 把1存進currentPage
 		
-	    if (targetPage == -1) {
-	        targetPage = (int) req.getSession().getAttribute("phaPageQty");
-	    }		
+		PhotoAlbumDAO_interface phaDAO = new PhotoAlbumHibernateDAO(HibernateUtil.getSessionFactory());
+		List<PhoWithAlbDTO> list = phaDAO.searchAllPhoto(albNo, currentPage);
 		
-		List<PhotoAlbumVO> phaList = phaSvc.getAllPha(currentPage);
-
-		if (req.getSession().getAttribute("phaPageQty") == null) {
-			int phaPageQty = phaSvc.getPageTotal();
-			req.getSession().setAttribute("phaPageQty", phaPageQty);
+		if (req.getSession().getAttribute("phoPageQty") == null) {
+			int phoPageQty = phaDAO.getTotalQty(albNo);
+			req.getSession().setAttribute("phoPageQty", phoPageQty);
 		}
-		
-		req.setAttribute("phaList", phaList);
+
+		req.setAttribute("list", list);
 		req.setAttribute("currentPage", currentPage);
 
-		return "/pha/listAllPha.jsp";
+		return "/pha/listOnePha.jsp";
+		
+		//---
+//		List<String> errorMsgs = new LinkedList<String>();
+//		// send the ErrorPage view.萬一有錯誤, 把錯誤訊息存在陣列中
+//		req.setAttribute("errorMsgs", errorMsgs); //key是errorMsgs			
+//		/***************************1.接收請求參數****************************************/
+//		Integer albNo = null;
+//		try {
+//			albNo = Integer.valueOf(req.getParameter("albNo")); //把字串轉成Integer
+//		} catch (Exception e) {
+//			errorMsgs.add("請輸入相簿編號");
+//		}
+//		
+//		/***************************2.開始查詢資料***************************************/
+//		PhotoAlbumDAO_interface phaDAO = new PhotoAlbumHibernateDAO(HibernateUtil.getSessionFactory());
+//		List<PhoWithAlbDTO> list = phaDAO.searchAllPhoto(albNo); //回傳包著PhoWithAlbDTO的list
+//		
+//		/***************************3.查詢完成,準備轉交(Send the Success view)***********/
+//		req.setAttribute("list", list);
+//
+//		forwardPath = "/pha/listOnePha.jsp";
+//		RequestDispatcher successView = req.getRequestDispatcher(forwardPath);// 成功轉交
+//		successView.forward(req, res);
+
 	}
+
 		
 //		byte[] byteArray = null;
 //

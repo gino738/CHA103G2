@@ -33,13 +33,13 @@
 		<br></li>
 		<h2>相簿查詢</h2>
 		<li>
-			<%--<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/pha.do">
-				<b>輸入相簿編號</b> <input type="text" name="phaNo">
+			<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/pha.do">
+				<b>輸入相簿編號</b> <input type="text" name="albNo" value="">
 				<!-- 所有請求名稱用hidden送出 -->
 				<input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="送出">
 			 </FORM>
-			<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/pha.do">
+			<%--<FORM METHOD="post" ACTION="${pageContext.request.contextPath}/pha.do">
 				<b>輸入建立日期</b> <input type="date" name="albDate"> <input
 					type="hidden" name="action" value="getOne_For_Display"> <input
 					type="submit" value="送出">

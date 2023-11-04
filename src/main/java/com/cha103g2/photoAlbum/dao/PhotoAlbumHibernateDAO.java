@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import com.cha103g2.photoAlbum.entity.PhotoAlbumVO;
 import com.cha103g2.util.HibernateUtil;
 import com.cha103g2.filter.OpenSessionInViewFilter;
+import com.cha103g2.photo.model.PhoWithAlbDTO;
 
 
 
@@ -87,6 +88,30 @@ public class PhotoAlbumHibernateDAO implements PhotoAlbumDAO_interface{
 	public long getTotal() {
 		return getSession().createQuery("select count(*) from PhotoAlbumVO", Long.class).uniqueResult();
 	}
+	//查詢全部相片============================================
+	@Override
+	public List<PhoWithAlbDTO> searchAllPhoto(Integer albNo, int currentPage){
+		int first = (currentPage - 1) * PAGE_MAX_RESULT;
+		List<PhoWithAlbDTO> list = getSession()
+			       .createQuery("from PhoWithAlbDTO where albNo = :albNo", PhoWithAlbDTO.class)
+			       .setParameter("albNo", albNo)
+			       .setFirstResult(first)
+			       .setMaxResults(PAGE_MAX_RESULT)
+			       .list();
+		return list;
+	}
+	
+	@Override
+	public int getTotalQty(Integer albNo) {
+		long total= getSession().createQuery("select count(*) from PhoWithAlbDTO where albNo = :albNo", Long.class)
+				.setParameter("albNo", albNo)
+				.uniqueResult(); //總筆數
+		int pageQty = (int)(total % PAGE_MAX_RESULT == 0 ? (total / PAGE_MAX_RESULT) : (total / PAGE_MAX_RESULT + 1));
+		return pageQty;
+			
+	}
+	
+
 
 	
 

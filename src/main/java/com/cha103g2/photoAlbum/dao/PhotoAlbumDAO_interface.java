@@ -2,6 +2,7 @@ package com.cha103g2.photoAlbum.dao;
 
 import java.util.List;
 
+import com.cha103g2.photo.model.PhoWithAlbDTO;
 import com.cha103g2.photoAlbum.entity.PhotoAlbumVO;
 
 
@@ -20,6 +21,11 @@ public interface PhotoAlbumDAO_interface {
 	
     List<PhotoAlbumVO> getAll(int currentPage);
 	
-	long getTotal();
+	long getTotal();	
+	
+	//DTO
+	public List<PhoWithAlbDTO> searchAllPhoto(Integer albNo, int currentPage);
+	
+	public int getTotalQty(Integer albNo);
 
 }

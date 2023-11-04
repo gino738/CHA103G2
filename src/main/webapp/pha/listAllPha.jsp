@@ -108,7 +108,7 @@
 				</tr>
 			</table>
 		</div>
-		</c:forEach>
+	</c:forEach>
 		
 	<c:if test="${currentPage > 1}">
 		<a href="${pageContext.request.contextPath}/pha.do?action=getAll&page=1">至第一頁</a>&nbsp;
@@ -116,10 +116,10 @@
 	<c:if test="${currentPage - 1 != 0}">
 		<a href="${pageContext.request.contextPath}/pha.do?action=getAll&page=${currentPage - 1}">上一頁</a>&nbsp;
 	</c:if>                                             
-	<c:if test="${currentPage + 1 <= empPageQty}">      
+	<c:if test="${currentPage + 1 <= phaPageQty}">      
 		<a href="${pageContext.request.contextPath}/pha.do?action=getAll&page=${currentPage + 1}">下一頁</a>&nbsp;
 	</c:if>                                             
-	<c:if test="${currentPage != empPageQty}">          
+	<c:if test="${currentPage != phaPageQty}">          
 		<a href="${pageContext.request.contextPath}/pha.do?action=getAll&page=${phaPageQty}">至最後一頁</a>&nbsp;
 	</c:if>
 
